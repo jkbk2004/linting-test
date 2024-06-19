@@ -25,4 +25,9 @@ rules:
     indent-sequences: consistent
   line-length: disable
   truthy: disable
+  trailing-spaces: disable
+  commas:
+    max-spaces-before: 0
+    min-spaces-after: 0
+    max-spaces-after: 1
   
