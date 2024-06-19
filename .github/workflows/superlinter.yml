@@ -1,34 +1,39 @@
 ---
-name: Lint
+name: Super-Linter
 
-on:  # yamllint disable-line rule:truthy
+on:
   push: null
   pull_request: null
-
-permissions: { }
 
 jobs:
   build:
     name: Lint
     runs-on: ubuntu-latest
-
+    
     permissions:
       contents: read
       packages: read
-      # To report GitHub Actions status checks
       statuses: write
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          # super-linter needs the full git history to get the
-          # list of files that changed across commits
           fetch-depth: 0
-
-      - name: Super-linter
-        uses: super-linter/super-linter@v6.6.0  # x-release-please-version
+      
+      - name: Super-Linter
+        uses: super-linter/super-linter@v6.3.0
         env:
-          # To report GitHub Actions status checks
+          LINTER_RULES_PATH: /
+          DEFAULT_BRANCH: origin/develop
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-...
+          FILTER_REGEX_EXCLUDE: .*(tests/fv3_conf/.*|tests/ci/.*|tests/auto/.*|tests/auto-jenkins/.*|tests/opnReqTests/.*|tests/opnReqTest|tests/atparse.bash).*
+          VALIDATE_BASH: true
+          BASH_SEVERITY: style
+          #VALIDATE_GITHUB_ACTIONS: true
+          #VALIDATE_LUA: true
+          #VALIDATE_MARKDOWN: true
+          VALIDATE_PYTHON_PYLINT: true
+          PYTHON_PYLINT_CONFIG_FILE: .python-lint
+          #VALIDATE_YAML: true
+          
