@@ -34,6 +34,6 @@ jobs:
           #VALIDATE_LUA: true
           #VALIDATE_MARKDOWN: true
           VALIDATE_PYTHON_PYLINT: true
-          PYTHON_PYLINT_CONFIG_FILE: '.github/linters/.python-lint'
+          #PYTHON_PYLINT_CONFIG_FILE: '.github/linters/.python-lint'
           #VALIDATE_YAML: true
           
